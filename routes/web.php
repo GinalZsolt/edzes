@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EdzesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    getTrainings();
-    return view('welcome');
-});
+Route::get('/',[EdzesController::class, 'index']);
