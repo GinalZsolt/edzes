@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EdzesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,21 +32,14 @@ Route::get('/trainings/{id}', function(String $id){
 });
 
 // Insert product
-Route::post('/trainings', function(Request $request){
-    $data = ["name"=>$request->name, "duration"=>$request->duration];
-    return Training::insert($data);
-});
+Route::post('/upload',[EdzesController::class,"store"]);
 
 // Update product by ID
-Route::patch('/trainings/{id}', function(Request $request, String $id){
-    $data = ["name"=>$request->name, "duration"=>$request->duration];
-    return Training::where('id', $id)->update($data);
-});
+Route::patch('/training/{id}',[EdzesController::class,"update"]);
+
 
 // DELETE product by ID
-Route::delete('/trainings/{id}', function(String $id){
-    return Training::where('id', $id)->delete();
-});
+Route::delete('/training/{id}',[EdzesController::class,'destroy']);
 
 // DELETE all products
 Route::delete('/trainings', function(){

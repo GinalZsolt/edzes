@@ -15,3 +15,5 @@ use App\Http\Controllers\EdzesController;
 */
 
 Route::get('/',[EdzesController::class, 'index']);
+Route::get('/newtraining',[EdzesController::class, 'newtraining']);
+Route::get('/update/{id}',[EdzesController::class, 'updatetraining']);

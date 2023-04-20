@@ -18,6 +18,13 @@ class EdzesController extends Controller
         return view('welcome',["trainings"=>Edzes::all()]);
     }
 
+    public function updatetraining(string $id){
+        return view('update',["training"=>Edzes::find($id)]);
+    }
+
+    public function newtraining(){
+        return view('newtraining');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +43,15 @@ class EdzesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $uj=new Edzes;
+        $uj->name = $request->name;
+        $uj->duration = $request->duration;
+
+
+        $uj->save();
+
+        return redirect("/");
+
     }
 
     /**
@@ -68,9 +83,14 @@ class EdzesController extends Controller
      * @param  \App\Models\Edzes  $edzes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Edzes $edzes)
+    public function update(Request $request,string $id)
     {
-        //
+        $updateabel = Edzes::find($id);
+        $updateabel->name = $request->name;
+        $updateabel->duration = $request->duration;
+        $updateabel->save();
+        return redirect("/");
+
     }
 
     /**
@@ -79,8 +99,9 @@ class EdzesController extends Controller
      * @param  \App\Models\Edzes  $edzes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Edzes $edzes)
+    public function destroy(string $id)
     {
-        //
+        Edzes::destroy($id);
+        return redirect('/');
     }
 }
